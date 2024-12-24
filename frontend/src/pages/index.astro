@@ -1,17 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getSecret } from 'astro:env/server';
 import Layout from '../layouts/Layout.astro';
+import { formatTitle } from '../lib';
 
 import { getCollection } from 'astro:content';
 
 const blogEntries = await getCollection('blog', ({ data }) => {
 	return data.publish == true;
 })
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout pageTitle={getSecret("BLOG_TITLE")}>
+	<ul>
+		{blogEntries.map(async post => (
+			<li><a href={`/${post.id}`}> > {post.id}: {await formatTitle(post.id)} {post.data.pubDate ? `@ ${post.data.pubDate.toLocaleDateString(undefined, {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}` : ""} {post.data.tags ? "->" : ""} {
+				post.data.tags?.map(v => "#" + v)?.join(", ")
+			}</a></li>
+		  ))}
+	</ul>
 </Layout>
