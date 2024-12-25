@@ -1,7 +1,5 @@
 ---
-import { getSecret } from "astro:env/server";
-
-const {pageTitle} = Astro.props
+const { pageTitle, darkMode } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,9 +9,9 @@ const {pageTitle} = Astro.props
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
+		<title>{ pageTitle }</title>
 	</head>
-	<body>
+	<body class=`${darkMode ? "macchiato" : "latte"}`>
 		<slot />
 	</body>
 </html>
