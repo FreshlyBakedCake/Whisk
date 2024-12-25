@@ -1,0 +1,18 @@
+---
+import { getEntry } from "astro:content";
+import { formatTitle } from "../lib";
+
+const { postId } = Astro.props;
+
+const post = await getEntry("blog", postId);
+---
+
+{
+	post ?
+	<a id={post.id} href={`/${post.id}`} class="flex flex-col text-center w-fit h-24 border border-ctp-rosewater rounded-md p-2">
+		<p>{await formatTitle(post.id)}</p>
+		{ post.data.pubDate ? <p>{post.data.pubDate.toLocaleDateString(undefined, {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}</p> : null }
+		{ post.data.tags ? <p>{ post.data.tags?.map(v => "#" + v)?.join(", ") }</p> : null }
+	</a>
+	: null
+}

@@ -1,7 +1,9 @@
 ---
-import { getSecret } from 'astro:env/server';
 import Layout from '../layouts/Global.astro';
-import { formatTitle } from '../lib';
+
+import Card from '../components/Card.astro';
+
+import { getSecret } from 'astro:env/server';
 
 import { getCollection } from 'astro:content';
 
@@ -11,14 +13,12 @@ const blogEntries = await getCollection('blog', ({ data }) => {
 ---
 
 <Layout pageTitle={getSecret("BLOG_TITLE")}>
-	<main class="bg-ctp-base w-full h-full">
-		<ul>
+	<main class="bg-ctp-base text-ctp-text w-full h-full justify-center flex flex-wrap">
+		<ul class="flex gap-6 w-1/2 h-full">
 			{
-			blogEntries.sort((a,b) => (b.data.pubDate ?? new Date("1980-01-01")).getTime() - (a.data.pubDate ?? new Date("1980-01-01")).getTime()).map(async post => (
-			<li><a href={`/${post.id}`}> > {post.id}: {await formatTitle(post.id)} {post.data.pubDate ? `@ ${post.data.pubDate.toLocaleDateString(undefined, {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}` : ""} {post.data.tags ? "->" : ""} {
-				post.data.tags?.map(v => "#" + v)?.join(", ")
-			}</a></li>
-			))
+			blogEntries
+			.sort((a,b) => (b.data.pubDate ?? new Date("1980-01-01")).getTime() - (a.data.pubDate ?? new Date("1980-01-01")).getTime())
+			.map(async post => <Card postId={post.id} />)
 			}
 		</ul>
 	</main>
