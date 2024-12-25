@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm';
 export default defineConfig({
 	site: import.meta.env.SITE_URL,
 	integrations: [tailwind()],
-	output: `server`,
+	output: `static`,
 	markdown: {
 		remarkPlugins: [
 			remarkGfm,
