@@ -7,5 +7,5 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
 	site: import.meta.env.SITE_URL,
 	integrations: [tailwind()],
-	output: `server`
+	output: `static`
 });
