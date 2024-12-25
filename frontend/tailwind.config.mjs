@@ -4,5 +4,7 @@ export default {
 	theme: {
 		extend: {},
 	},
-	plugins: [require("@catppuccin/tailwindcss")],
+	plugins: [require("@catppuccin/tailwindcss")({
+		prefix: "ctp"
+	})],
 }

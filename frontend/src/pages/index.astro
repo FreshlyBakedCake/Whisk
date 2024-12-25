@@ -2,8 +2,6 @@
 import { getSecret } from 'astro:env/server';
 import Layout from '../layouts/Global.astro';
 import { formatTitle } from '../lib';
-Astro.cookies.set('darkMode', "true")
-const darkMode = Astro.cookies.get('darkMode')?.boolean();
 
 import { getCollection } from 'astro:content';
 
@@ -12,14 +10,16 @@ const blogEntries = await getCollection('blog', ({ data }) => {
 })
 ---
 
-<Layout pageTitle={getSecret("BLOG_TITLE")} darkMode={darkMode}>
-	<main class="bg-pink w-full h-full">
+<Layout pageTitle={getSecret("BLOG_TITLE")}>
+	<main class="bg-ctp-base w-full h-full">
 		<ul>
-			{blogEntries.map(async post => (
-				<li><a href={`/${post.id}`}> > {post.id}: {await formatTitle(post.id)} {post.data.pubDate ? `@ ${post.data.pubDate.toLocaleDateString(undefined, {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}` : ""} {post.data.tags ? "->" : ""} {
-					post.data.tags?.map(v => "#" + v)?.join(", ")
-				}</a></li>
-			  ))}
+			{
+			blogEntries.sort((a,b) => (b.data.pubDate ?? new Date("1980-01-01")).getTime() - (a.data.pubDate ?? new Date("1980-01-01")).getTime()).map(async post => (
+			<li><a href={`/${post.id}`}> > {post.id}: {await formatTitle(post.id)} {post.data.pubDate ? `@ ${post.data.pubDate.toLocaleDateString(undefined, {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}` : ""} {post.data.tags ? "->" : ""} {
+				post.data.tags?.map(v => "#" + v)?.join(", ")
+			}</a></li>
+			))
+			}
 		</ul>
 	</main>
 </Layout>
