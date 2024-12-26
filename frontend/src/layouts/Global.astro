@@ -1,6 +1,5 @@
 ---
-Astro.cookies.set('darkMode', "true")
-const darkMode = Astro.cookies.get('darkMode')?.boolean();
+import Theme from "../components/Theme.astro";
 
 const { pageTitle } = Astro.props;
 ---
@@ -14,11 +13,11 @@ const { pageTitle } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{ pageTitle }</title>
 	</head>
-	<body class=`${darkMode ? "ctp-macchiato" : "ctp-latte"}`>
+	<body>
+		<Theme />
 		<slot />
 	</body>
 </html>
-
 <style>
 	html,
 	body {
