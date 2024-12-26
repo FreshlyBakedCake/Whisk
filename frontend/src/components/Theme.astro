@@ -1,0 +1,20 @@
+<script>
+  let theme = window.localStorage.getItem("theme");
+
+  switch (theme) {
+    case "dark": {
+      document.body.classList.add("ctp-macchiato");
+      break;
+    };
+    case "light": {
+      document.body.classList.add("ctp-latte");
+      break;
+    };
+  };
+</script>
+
+<style is:global>
+  body {
+    @apply ctp-latte dark:ctp-macchiato;
+  }
+</style>
