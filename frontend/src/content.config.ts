@@ -5,8 +5,8 @@ import { getSecret } from "astro:env/server";
 export const blogSchema = z.object({
 	displayName: z.string().optional(),
 	tags: z.array(z.string()).optional(),
-	pubDate: z.coerce.date().optional(),
-	publish: z.boolean().default(false)
+	publishedOn: z.coerce.date().optional(),
+	published: z.boolean().default(false)
 })
 
 const blog = defineCollection({
