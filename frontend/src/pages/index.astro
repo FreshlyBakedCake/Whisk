@@ -13,13 +13,11 @@ const blogEntries = await getCollection('blog', ({ data }) => {
 ---
 
 <Layout pageTitle={getSecret("BLOG_TITLE")}>
-	<main class="bg-ctp-base text-ctp-text w-full h-full justify-center flex flex-wrap">
-		<ul class="flex gap-6 w-1/2 h-full">
-			{
-			blogEntries
-			.sort((a,b) => (b.data.publishedOn ?? new Date("1980-01-01")).getTime() - (a.data.publishedOn ?? new Date("1980-01-01")).getTime())
-			.map(async post => <Card postId={post.id} />)
-			}
-		</ul>
-	</main>
+	<ul class="flex gap-6 w-1/2 h-full">
+		{
+		blogEntries
+		.sort((a,b) => (b.data.publishedOn ?? new Date("1980-01-01")).getTime() - (a.data.publishedOn ?? new Date("1980-01-01")).getTime())
+		.map(async post => <Card postId={post.id} />)
+		}
+	</ul>
 </Layout>
