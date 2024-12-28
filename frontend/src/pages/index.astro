@@ -8,7 +8,7 @@ import { getSecret } from 'astro:env/server';
 import { getCollection } from 'astro:content';
 
 const blogEntries = await getCollection('blog', ({ data }) => {
-	return data.publish == true;
+	return data.published == true;
 })
 ---
 
@@ -17,7 +17,7 @@ const blogEntries = await getCollection('blog', ({ data }) => {
 		<ul class="flex gap-6 w-1/2 h-full">
 			{
 			blogEntries
-			.sort((a,b) => (b.data.pubDate ?? new Date("1980-01-01")).getTime() - (a.data.pubDate ?? new Date("1980-01-01")).getTime())
+			.sort((a,b) => (b.data.publishedOn ?? new Date("1980-01-01")).getTime() - (a.data.publishedOn ?? new Date("1980-01-01")).getTime())
 			.map(async post => <Card postId={post.id} />)
 			}
 		</ul>
