@@ -20,5 +20,29 @@ const { Content } = await render(post);
 const title = await formatTitle(post.id);
 ---
 <Layout pageTitle={title}>
-	<Content />
+	<div class="p-8 w-4/5 lg:w-[72rem] m-auto h-full">
+		<header class="mb-4 block">
+			<h1 class="text-4xl">{title}</h1>
+			{post.data.publishedOn
+				? <p>Published {post.data.publishedOn.toLocaleDateString(undefined, {dateStyle: "full"})}</p>
+				: undefined}
+		</header>
+		<article class="text-lg">
+			<Content />
+		</article>
+	</div>
 </Layout>
+
+<style is:global>
+	article p {
+		@apply my-4;
+	}
+
+	article blockquote {
+		@apply px-4 border-l-2 border-ctp-pink;
+	}
+
+	article a {
+		@apply underline text-ctp-blue;
+	}
+</style>
