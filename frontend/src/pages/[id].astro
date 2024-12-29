@@ -21,6 +21,9 @@ const title = await formatTitle(post.id);
 ---
 <Layout pageTitle={title}>
 	<div class="p-8 w-4/5 lg:w-[72rem] m-auto h-full">
+		<nav class="pb-6">
+	  	<a href="/">&larr; Back to all posts</a>
+		</nav>
 		<header class="mb-4 block">
 			<h1 class="text-4xl">{title}</h1>
 			{post.data.publishedOn
@@ -30,6 +33,10 @@ const title = await formatTitle(post.id);
 		<article class="text-lg">
 			<Content />
 		</article>
+		<hr />
+		<nav class="pt-6">
+	  	<a href="/">&larr; Back to all posts</a>
+		</nav>
 	</div>
 </Layout>
 
@@ -42,6 +49,7 @@ const title = await formatTitle(post.id);
 		@apply px-4 border-l-2 border-ctp-pink;
 	}
 
+	nav a,
 	article a {
 		@apply underline text-ctp-blue;
 	}
