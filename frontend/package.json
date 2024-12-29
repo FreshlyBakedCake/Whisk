@@ -12,7 +12,9 @@
     "@astrojs/tailwind": "^5.1.4",
     "@catppuccin/tailwindcss": "^0.1.6",
     "@portaljs/remark-wiki-link": "^1.2.0",
+    "@types/deasync": "^0.1.5",
     "astro": "^5.1.1",
+    "deasync": "^0.1.30",
     "remark-gfm": "^4.0.0",
     "tailwindcss": "^3.4.17"
   },
@@ -20,5 +22,8 @@
     "patchedDependencies": {
       "@portaljs/remark-wiki-link@1.2.0": "patches/@portaljs__remark-wiki-link@1.2.0.patch"
     }
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
   }
 }
