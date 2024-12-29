@@ -18,7 +18,7 @@ const blog = defineCollection({
 			let id: string;
 			let fileName = options.entry.match(/\+\d+\s/);
 			if (!fileName) {
-				id = options.entry.includes("/") ? options.entry.split("/").at(-1)! : options.entry;
+				id = options.entry.split("/").at(-1)!;
 			} else {
 				id = parseInt(fileName[0]).toString()
 			}
