@@ -29,6 +29,9 @@ const title = await formatTitle(post.id);
 			{post.data.publishedOn
 				? <p class="text-ctp-subtext0">Published {post.data.publishedOn.toLocaleDateString(undefined, {dateStyle: "full"})}</p>
 				: undefined}
+			{post.data.tags
+				? <p class="text-ctp-subtext0">{post.data.tags.map(tag => `#${tag}`).join(" ")}</p>
+				: undefined}
 		</header>
 		<article class="text-lg">
 			<Content />
