@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca03fdd9_246326b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037847
+      },
+      "writtenOn": "2024-12-30T23:53:34Z",
+      "side": 1,
+      "message": "(Replaced approved change due to wrong merge method)",
+      "revId": "11d912132237b9ba519e982fe4c6a57e2282887d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
