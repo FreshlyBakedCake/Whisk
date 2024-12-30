@@ -27,7 +27,7 @@ const title = await formatTitle(post.id);
 		<header class="mb-4 block">
 			<h1 class="text-4xl">{title}</h1>
 			{post.data.publishedOn
-				? <p>Published {post.data.publishedOn.toLocaleDateString(undefined, {dateStyle: "full"})}</p>
+				? <p class="text-ctp-subtext0">Published {post.data.publishedOn.toLocaleDateString(undefined, {dateStyle: "full"})}</p>
 				: undefined}
 		</header>
 		<article class="text-lg">
