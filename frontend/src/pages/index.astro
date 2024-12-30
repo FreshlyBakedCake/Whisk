@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Global.astro';
 
-import Card from '../components/Card.astro';
-
 import { getSecret } from 'astro:env/server';
 
 import { getCollection } from 'astro:content';
+import { formatTitle } from '../lib';
 
 const blogEntries = await getCollection('blog', ({ data }) => {
 	return data.published == true;
@@ -13,11 +12,25 @@ const blogEntries = await getCollection('blog', ({ data }) => {
 ---
 
 <Layout pageTitle={getSecret("BLOG_TITLE")}>
-	<ul class="flex gap-6 w-1/2 h-full">
-		{
-		blogEntries
-		.sort((a,b) => (b.data.publishedOn ?? new Date("1980-01-01")).getTime() - (a.data.publishedOn ?? new Date("1980-01-01")).getTime())
-		.map(async post => <Card postId={post.id} />)
-		}
+	<h1 class="text-6xl p-8">{getSecret("BLOG_TITLE")}</h1>
+	<ul class="block p-8 w-full sm:w-4/5 lg:w-[72rem] m-auto h-full">
+		{blogEntries
+			.sort((a,b) => (parseInt(b.id, 10) - parseInt(a.id, 10)))
+			.sort((a,b) => (b.data.publishedOn ?? new Date("1980-01-01")).getTime() - (a.data.publishedOn ?? new Date("1980-01-01")).getTime())
+			.map(async post => (
+				<li class="m-2 p-0 hover:bg-ctp-surface0 active:bg-ctp-surface0 bg-ctp-crust">
+					<a class="m-0 p-2 block" href=`/${post.id}`>
+						<div class="flex justify-between">
+							<span>{await formatTitle(post.id)}</span>
+							{post.data.publishedOn ? (
+								<div class="hidden sm:block pl-4 text-ctp-subtext0">Published {post.data.publishedOn?.toLocaleDateString(undefined, {dateStyle: "medium"})}</div>
+								<div class="block sm:hidden pl-4 text-ctp-subtext0">@{post.data.publishedOn?.toLocaleDateString(undefined, {dateStyle: "short"})}</div>
+							) : undefined}
+						</div>
+						<span class="text-ctp-subtext0">{(post.data.tags ?? []).map(tag => `#${tag}`).join(" ")}</span>
+					</a>
+				</li>
+			)
+		)}
 	</ul>
 </Layout>
